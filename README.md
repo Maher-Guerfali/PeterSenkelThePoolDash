@@ -2,6 +2,12 @@
 
 A beautiful and modern product management dashboard with API testing capabilities.
 
+![Dashboard Preview](https://raw.githubusercontent.com/Maher-Guerfali/PeterSenkelThePoolDash/main/public/dashboard-preview.png)
+
+**🌐 Live Demo:** [openme.app](https://openme.app)
+
+This is a React-based frontend dashboard built for The Pool API backend. Similar to Swagger UI but with a modern, interactive interface featuring real-time data visualization, smooth animations, and a complete API testing suite. Experience the full power of The Pool API through an intuitive and visually stunning interface.
+
 ## Features
 
 - 🎨 Modern, responsive UI with smooth animations
@@ -73,7 +79,9 @@ src/
 
 ## API Integration
 
-The application connects to The Pool API for product management operations. Configure your API endpoint in the appropriate configuration files.
+The application connects to The Pool API (`petersenkelthepool.onrender.com`) for product management operations. This dashboard serves as an alternative to Swagger, offering a more intuitive and feature-rich interface for testing and managing your API endpoints.
+
+**Backend API:** [https://petersenkelthepool.onrender.com/api-docs](https://petersenkelthepool.onrender.com/api-docs)
 
 ## License
 
