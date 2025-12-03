@@ -213,7 +213,7 @@ interface DataVisualizationProps {
                       <td className="px-4 py-3 relative">
                         <span className="absolute bottom-1 left-4 text-[9px] text-muted-foreground/30 group-hover:opacity-0 transition-opacity uppercase tracking-wider">hover</span>
                         <code className="text-xs text-muted-foreground bg-muted px-2 py-1">
-                          {product._id.slice(-8)}
+                          {product._id.slice(0, 3)}..{product._id.slice(-2)}
                         </code>
                       </td>
                       <td className="px-4 py-3 font-bold text-foreground">{product.name}</td>
