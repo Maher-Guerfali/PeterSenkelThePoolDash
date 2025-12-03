@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 30 15% 96%;
+    --foreground: 0 0% 22%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 22%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 22%;
+
+    --primary: 351 83% 76%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 30 10% 92%;
+    --secondary-foreground: 0 0% 22%;
+
+    --muted: 30 10% 90%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 350 70% 65%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 145 60% 40%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 35 90% 55%;
+    --warning-foreground: 0 0% 10%;
+
+    --border: 30 10% 88%;
+    --input: 30 10% 92%;
+    --ring: 350 70% 65%;
+
+    --radius: 0rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 10%;
+    --sidebar-primary: 350 70% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 30 10% 96%;
+    --sidebar-accent-foreground: 0 0% 10%;
+    --sidebar-border: 30 10% 88%;
+    --sidebar-ring: 350 70% 65%;
+  }
+
+  .dark {
+    --background: 30 15% 96%;
+    --foreground: 0 0% 22%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 22%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 22%;
+    --primary: 351 83% 76%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 10% 92%;
+    --secondary-foreground: 0 0% 22%;
+    --muted: 30 10% 90%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 351 83% 76%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 30 10% 88%;
+    --input: 30 10% 92%;
+    --ring: 350 70% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: 'Outfit', system-ui, sans-serif;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .text-pink {
+    color: hsl(var(--primary));
+  }
+
+  .bg-pink {
+    background-color: hsl(var(--primary));
+  }
+
+  .border-pink {
+    border-color: hsl(var(--primary));
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.4s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.4s ease-out forwards;
+  }
+
+  .stagger-1 { animation-delay: 0.1s; opacity: 0; }
+  .stagger-2 { animation-delay: 0.2s; opacity: 0; }
+  .stagger-3 { animation-delay: 0.3s; opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes gentleSwing {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(8deg); }
+  30% { transform: rotate(-6deg); }
+  45% { transform: rotate(5deg); }
+  60% { transform: rotate(-4deg); }
+  75% { transform: rotate(2deg); }
+  90% { transform: rotate(-1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.4);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
