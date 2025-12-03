@@ -60,7 +60,6 @@ export function DataVisualization({ products, pagination, onDeleteProduct, onUpd
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <CroissantIcon className="w-8 h-8 text-pink" />
               <ScriptL className="w-8 h-8 text-pink" />
             </div>
             <div>

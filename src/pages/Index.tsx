@@ -46,6 +46,14 @@ const Index = () => {
               <div className="w-2 h-2 bg-success animate-pulse" />
               <span className="text-xs font-bold text-success uppercase tracking-wider">Connected</span>
             </div>
+            <a
+              href="https://petersenkelthepool.onrender.com/api-docs"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 bg-pink text-white text-xs font-bold uppercase tracking-wider border-2 border-pink hover:bg-pink/80 transition-colors"
+            >
+              Open Swagger
+            </a>
             <code className="text-xs text-muted-foreground bg-muted px-3 py-1.5 border-2 border-border hidden lg:block">
               petersenkelthepool.onrender.com
             </code>
