@@ -14,7 +14,7 @@ export const FloatingLogo = ({ className = '' }: FloatingLogoProps) => {
       <img
         src="/logo.png"
         alt="Nanasook Logo"
-        className="w-16 h-16 object-contain drop-shadow-lg"
+        className="w-[70px] h-[70px] object-contain drop-shadow-lg"
       />
     </div>
   );

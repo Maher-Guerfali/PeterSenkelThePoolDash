@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useApi } from '@/hooks/useApi';
 import { ApiControlPanel } from '@/components/ApiControlPanel';
 import { ApiLogPanel } from '@/components/ApiLogPanel';
@@ -22,9 +22,37 @@ const Index = () => {
     clearLogs,
   } = useApi();
 
+  const [currentPage, setCurrentPage] = useState(1);
+    const [showAllProducts, setShowAllProducts] = useState(false);
+
   useEffect(() => {
-    fetchProducts({ page: 1, limit: 10 });
-  }, []);
+      if (showAllProducts) {
+        // Use actual total from pagination, or fallback to 100 if not available
+        const totalProducts = pagination.total || 100;
+        fetchProducts({ page: 1, limit: totalProducts });
+      } else {
+        fetchProducts({ page: currentPage, limit: 10 });
+      }
+    }, [currentPage, showAllProducts, fetchProducts, pagination.total]);
+
+  const handleNextPage = () => {
+    if (currentPage < pagination.pages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+    const handleDisplayAllToggle = () => {
+      setShowAllProducts(!showAllProducts);
+      if (!showAllProducts) {
+        setCurrentPage(1); // Reset to page 1 when toggling
+      }
+    };
 
   return (
     <div className="h-screen overflow-hidden bg-background">
@@ -50,7 +78,7 @@ const Index = () => {
               href="https://petersenkelthepool.onrender.com/api-docs"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1.5 bg-pink text-white text-xs font-bold uppercase tracking-wider border-2 border-pink hover:bg-pink/80 transition-colors"
+              className="px-3 py-1.5 bg-pink text-white text-xs font-bold uppercase tracking-wider border-2 border-pink hover:bg-pink/70 hover:brightness-110 transition-all shadow-md hover:shadow-lg"
             >
               Open Swagger
             </a>
@@ -98,6 +126,15 @@ const Index = () => {
             onDeleteProduct={deleteProduct}
             onUpdateProduct={updateProduct}
             loading={loading}
+            onNextPage={handleNextPage}
+            onPreviousPage={handlePreviousPage}
+              showAllProducts={showAllProducts}
+              onDisplayAllToggle={handleDisplayAllToggle}
+              onFetchProducts={(params) => {
+                setShowAllProducts(false);
+                setCurrentPage(params?.page || 1);
+                return fetchProducts(params);
+              }}
           />
         </div>
       </main>

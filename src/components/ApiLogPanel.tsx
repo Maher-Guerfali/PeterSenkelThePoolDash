@@ -28,61 +28,67 @@ const getStatusIcon = (status: number) => {
 
 export function ApiLogPanel({ logs, onClearLogs }: ApiLogPanelProps) {
   return (
-    <div className="h-full flex flex-col bg-card border-2 border-border">
-      {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-border">
-        <div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-success animate-pulse" />
-            <h3 className="text-xs font-bold uppercase tracking-wider text-foreground">Request Logs</h3>
-            <span className="text-xs text-muted-foreground">({logs.length})</span>
-          </div>
-          <PinkWave className="w-16 h-4 text-pink mt-1" />
-        </div>
-        <Button variant="ghost" size="sm" onClick={onClearLogs} className="text-muted-foreground hover:text-foreground">
-          <Trash2 className="w-4 h-4" />
-        </Button>
-      </div>
-
-      {/* Logs */}
-      <ScrollArea className="flex-1">
-        <div className="p-3 space-y-2">
-          {logs.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-8 text-muted-foreground">
-              <Clock className="w-6 h-6 mb-2 opacity-50" />
-              <p className="text-xs uppercase tracking-wider">No requests yet</p>
+    <div className="h-full flex">
+      <div className="w-3/10 flex flex-col bg-card border-2 border-border">
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b border-border">
+          <div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-success animate-pulse" />
+              <h3 className="text-xs font-bold uppercase tracking-wider text-foreground">Request Logs</h3>
+              <span className="text-xs text-muted-foreground">({logs.length})</span>
             </div>
-          ) : (
-            logs.map((log, index) => (
-              <div
-                key={log.id}
-                className="p-3 bg-muted/30 border border-border animate-slide-up"
-                style={{ animationDelay: `${index * 0.05}s` }}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className={`px-2 py-0.5 text-[10px] font-bold ${methodColors[log.method]}`}>
-                      {log.method}
-                    </span>
-                    <code className="text-xs text-muted-foreground truncate max-w-[120px]">{log.endpoint}</code>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    {getStatusIcon(log.status)}
-                    <span className="text-xs font-mono text-muted-foreground">{log.status}</span>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between text-[10px] text-muted-foreground uppercase tracking-wider">
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
-                    {log.duration}ms
-                  </span>
-                  <span>{log.timestamp.toLocaleTimeString()}</span>
-                </div>
-              </div>
-            ))
-          )}
+            <PinkWave className="w-16 h-4 text-pink mt-1" />
+          </div>
+          <Button variant="ghost" size="sm" onClick={onClearLogs} className="text-muted-foreground hover:text-foreground">
+            <Trash2 className="w-4 h-4" />
+          </Button>
         </div>
-      </ScrollArea>
+
+        {/* Logs */}
+        <ScrollArea className="flex-1">
+          <div className="p-3 space-y-2">
+            {logs.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-8 text-muted-foreground">
+                <Clock className="w-6 h-6 mb-2 opacity-50" />
+                <p className="text-xs uppercase tracking-wider">No requests yet</p>
+              </div>
+            ) : (
+              logs.map((log, index) => (
+                <div
+                  key={log.id}
+                  className="p-3 bg-muted/30 border border-border animate-slide-up"
+                  style={{ animationDelay: `${index * 0.05}s` }}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className={`px-2 py-0.5 text-[10px] font-bold ${methodColors[log.method]}`}>
+                        {log.method}
+                      </span>
+                      <code className="text-xs text-muted-foreground truncate max-w-[120px]">{log.endpoint}</code>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {getStatusIcon(log.status)}
+                      <span className="text-xs font-mono text-muted-foreground">{log.status}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between text-[10px] text-muted-foreground uppercase tracking-wider">
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {log.duration}ms
+                    </span>
+                    <span>{log.timestamp.toLocaleTimeString()}</span>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </ScrollArea>
+      </div>
+      {/* CRUD Operations Section */}
+      <div className="w-7/10 flex flex-col">
+        {/* CRUD operations will be implemented here */}
+      </div>
     </div>
   );
 }

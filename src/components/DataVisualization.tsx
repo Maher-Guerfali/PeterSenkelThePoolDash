@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Table, Layers, Package, DollarSign, Calendar, Hash, Trash2, Eye, Edit } from 'lucide-react';
+import { Table, Layers, Package, DollarSign, Calendar, Hash, Trash2, Eye, Edit, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -24,9 +24,14 @@ interface DataVisualizationProps {
   onDeleteProduct: (id: string) => Promise<{ success: boolean }>;
   onUpdateProduct: (id: string, data: Partial<Product>) => Promise<{ success: boolean }>;
   loading: boolean;
+  onNextPage: () => void;
+  onPreviousPage: () => void;
+    showAllProducts: boolean;
+    onDisplayAllToggle: () => void;
+    onFetchProducts: (params?: any) => Promise<any>;
 }
 
-export function DataVisualization({ products, pagination, onDeleteProduct, onUpdateProduct, loading }: DataVisualizationProps) {
+  export function DataVisualization({ products, pagination, onDeleteProduct, onUpdateProduct, loading, onNextPage, onPreviousPage, showAllProducts, onDisplayAllToggle, onFetchProducts }: DataVisualizationProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [editFormData, setEditFormData] = useState({ name: '', price: 0, category: '' });
@@ -117,9 +122,28 @@ export function DataVisualization({ products, pagination, onDeleteProduct, onUpd
       <div className="px-6 py-3 border-b border-border bg-muted/30">
         <div className="flex items-center justify-between text-xs uppercase tracking-wider">
           <span className="text-muted-foreground">
-            Page <span className="font-bold text-foreground">{pagination.page}</span> of{' '}
-            <span className="font-bold text-foreground">{pagination.pages}</span>
+              {showAllProducts ? (
+                <>All Products</>
+              ) : (
+                <>
+                  Page <span className="font-bold text-foreground">{pagination.page}</span> of{' '}
+                  <span className="font-bold text-foreground">{pagination.pages}</span>
+                </>
+              )}
           </span>
+          <div className="flex items-center gap-2">
+            {!showAllProducts && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={onDisplayAllToggle}
+                disabled={loading}
+                className="h-7 px-3 border-2 text-xs font-bold uppercase tracking-wider"
+              >
+                Display All
+              </Button>
+            )}
+          </div>
           <span className="text-muted-foreground">
             <span className="font-bold text-foreground">{products.length}</span> products loaded
           </span>
@@ -197,7 +221,7 @@ export function DataVisualization({ products, pagination, onDeleteProduct, onUpd
                         <span className="text-pink font-bold">${product.price.toFixed(2)}</span>
                       </td>
                       <td className="px-4 py-3">
-                        <span className="px-2 py-1 text-xs font-bold bg-primary/10 text-primary border border-primary/30">
+                        <span className="text-sm font-bold text-pink">
                           {product.category}
                         </span>
                       </td>
@@ -251,12 +275,12 @@ export function DataVisualization({ products, pagination, onDeleteProduct, onUpd
                       <h3 className="font-bold text-foreground">
                         {product.name}
                       </h3>
-                      <span className="text-xs text-muted-foreground uppercase tracking-wider">ID: {product._id.slice(-8)}</span>
+                      <span className="text-xs text-muted-foreground uppercase tracking-wider">ID: {product._id.slice(0, 3)}...{product._id.slice(-3)}</span>
                     </div>
                     <span className="text-xl font-bold text-pink">${product.price.toFixed(2)}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="px-2 py-1 text-xs font-bold bg-primary/10 text-primary border border-primary/30">
+                    <span className="text-sm font-bold text-pink">
                       {product.category}
                     </span>
                     <span className="text-xs text-muted-foreground">
